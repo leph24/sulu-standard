@@ -3,6 +3,7 @@
 {% set title = extension.seo.title|default(content.title|default('')) %}
 {% set description = extension.seo.description|default(content.article|default('')) %}
 
+{# DESCRIPTION #}
 {% if (description is not empty) and (description.length > 146) %}
     {% set description = description|striptags|slice(0, 146) ~ '...' %}
 {% else %}
@@ -11,45 +12,45 @@
 
 {# META SEO #}
 {% autoescape false %}
-{% if (extension is defined) and (content is defined) %}
-    {{ meta_seo(extension|default(''), content) }}
-{% endif %}
+    {% if (extension is defined) and (content is defined) %}
+        {{ meta_seo(extension|default(''), content) }}
+    {% endif %}
 
-{# META ALTERNATE #}
-{% if (urls is defined) %}
-    {{ meta_alternate(urls) }}
-{% endif %}
+    {# META ALTERNATE #}
+    {% if (urls is defined) %}
+        {{ meta_alternate(urls) }}
+    {% endif %}
 {% endautoescape %}
 
 {# CUSTOM META TAGS #}
-<meta name="language" content="{{ language }}">
-<meta name="publisher" content="{{ company }}">
-<meta name="author" content="{{ client }}">
-<meta name="copyright" content="{{ client }}">
+<meta name="language" content="{{ language|default('') }}">
+<meta name="publisher" content="{{ company|default('') }}">
+<meta name="author" content="{{ client|default('') }}">
+<meta name="copyright" content="{{ client|default('') }}">
 <meta name="audience" content="all">
 <meta name="distribution" content="global">
-<meta name="image" content="{{ image }}">
+<meta name="image" content="{{ image|default('') }}">
 
 {# OPEN GRAPH - OG - TAGS #}
-<meta property="og:site_name" content="{{ client }}">
-<meta property="og:url" content="{{ url }}">
-<meta property="og:title" content="{{ title }}">
+<meta property="og:site_name" content="{{ client|default('') }}">
+<meta property="og:url" content="{{ url|default('') }}">
+<meta property="og:title" content="{{ title|default('') }}">
 <meta property="og:type" content="website">
-<meta property="og:image" content="{{ image }}">
-<meta property="og:description" content="{{ description }}">
-<meta property="og:locale" content="{{ language }}">
+<meta property="og:image" content="{{ image|default('') }}">
+<meta property="og:description" content="{{ description|default('') }}">
+<meta property="og:locale" content="{{ language|default('') }}">
 
 {# DUBLIN CORE - DC - TAGS #}
-<meta name="DC.Title" content="{{ client }}">
-<meta name="DC.Publisher" content="{{ company }}">
-<meta name="DC.Copyright" content="{{ client }}">
+<meta name="DC.Title" content="{{ client|default('') }}">
+<meta name="DC.Publisher" content="{{ company|default('') }}">
+<meta name="DC.Copyright" content="{{ client|default('') }}">
 
 {# TWITTER TAGS #}
 <meta name="twitter:card" content="summary">
-<meta name="twitter:url" content="{{ url }}">
-<meta name="twitter:title" content="{{ title }}">
-<meta name="twitter:description" content="{{ description }}">
-<meta name="twitter:image" content="{{ image }}">
+<meta name="twitter:url" content="{{ url|default('') }}">
+<meta name="twitter:title" content="{{ title|default('') }}">
+<meta name="twitter:description" content="{{ description|default('') }}">
+<meta name="twitter:image" content="{{ image|default('') }}">
 
 
 {# BOT TAGS #}
